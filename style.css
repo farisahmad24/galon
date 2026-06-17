@@ -1,0 +1,928 @@
+/* =============================================================
+   AIRES MINERAL — style.css
+   Ditulis oleh: Kelompok TRPL
+   Dihubungkan dari: index.html via <link rel="stylesheet">
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   BAGIAN 1 — GOOGLE FONTS IMPORT
+   Font yang dipilih:
+   • "Plus Jakarta Sans" (display/heading) — font sans-serif modern
+     dengan karakter tegas dan sedikit geometris, cocok untuk nama
+     usaha dan judul section yang ingin terkesan profesional namun
+     tetap bersahabat dan terjangkau.
+   • "Noto Sans" (body) — font bodi yang bersih, sangat mudah dibaca
+     di layar ponsel maupun desktop; dipilih karena pelanggan utama
+     adalah mahasiswa dan warga umum yang mengakses via HP.
+------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans:wght@400;500;700&display=swap');
+
+
+/* -------------------------------------------------------------
+   BAGIAN 2 — VARIABEL WARNA & TIPOGRAFI (CSS Custom Properties)
+
+   ALASAN PEMILIHAN WARNA:
+   ─────────────────────────────────────────────────────────────
+   Palet utama didominasi oleh biru-biru kehijauan (biru air /
+   aqua) sebagai warna inti. Alasannya:
+
+   1. BIRU  (#0077B6) — warna universal yang diasosiasikan dengan
+      AIR, kejernihan, kepercayaan, dan kebersihan. Ini adalah
+      identitas inti AIRES MINERAL sebagai depot air minum.
+
+   2. BIRU MUDA / SKY (#00B4D8) — dipakai pada elemen interaktif
+      (link, hover nav) untuk memberi kesan segar dan ber-energi,
+      seperti air mengalir yang jernih.
+
+   3. AQUA TERANG (#90E0EF) — sebagai aksen lembut pada kartu
+      produk dan blockquote agar terasa segar tanpa terkesan
+      "dingin" yang berlebihan.
+
+   4. BIRU GELAP (#023E8A) — digunakan di header dan footer untuk
+      memberi kesan solid, terpercaya, dan berwibawa — merepre-
+      sentasikan komitmen pemilik Aris terhadap kualitas air.
+
+   5. PUTIH (#FFFFFF) dan ABU SANGAT TERANG (#F0F8FF — "Alice
+      Blue") — sebagai latar halaman agar terasa bersih dan
+      higienis, selaras dengan posisi produk sebagai air minum.
+
+   6. HIJAU AKSEN (#52B788) — digunakan pada badge harga dan call-
+      to-action karena warna hijau memberi sinyal "hemat", "aman",
+      dan "sehat" — sejalan dengan motto "Harga Hemat".
+
+   7. KUNING HANGAT (#FFB703) — untuk highlight jam operasional
+      agar informasi penting mudah ditemukan; warna hangat ini
+      memberi kesan "ramah dan terbuka", cocok dengan nilai
+      pelayanan usaha ini.
+------------------------------------------------------------- */
+:root {
+  /* — Warna Primer — */
+  --clr-biru-tua:    #023E8A;   /* header, footer, aksen judul */
+  --clr-biru-utama:  #0077B6;   /* warna dominan teks & border penting */
+  --clr-biru-muda:   #00B4D8;   /* hover, link aktif, garis dekorasi */
+  --clr-aqua:        #90E0EF;   /* latar kartu produk, blockquote */
+  --clr-aqua-pucat:  #CCEEFF;   /* highlight ringan */
+
+  /* — Warna Netral — */
+  --clr-putih:       #FFFFFF;
+  --clr-latar:       #F0F8FF;   /* alice blue — latar halaman utama */
+  --clr-abu-muda:    #E8F4FD;   /* latar section bergantian */
+  --clr-abu-teks:    #4A4A5A;   /* teks paragraf */
+  --clr-abu-gelap:   #1E1E2E;   /* teks heading gelap */
+
+  /* — Warna Aksen — */
+  --clr-hijau:       #52B788;   /* harga, badge sukses, CTA */
+  --clr-hijau-muda:  #D8F3DC;   /* latar badge harga */
+  --clr-kuning:      #FFB703;   /* jam operasional, highlight */
+  --clr-kuning-muda: #FFF3CD;   /* latar kotak jam operasional */
+
+  /* — Tipografi — */
+  --font-display:    'Plus Jakarta Sans', sans-serif;
+  --font-body:       'Noto Sans', sans-serif;
+
+  --fs-xs:    0.75rem;   /*  12px */
+  --fs-sm:    0.875rem;  /*  14px */
+  --fs-base:  1rem;      /*  16px */
+  --fs-md:    1.125rem;  /*  18px */
+  --fs-lg:    1.375rem;  /*  22px */
+  --fs-xl:    1.75rem;   /*  28px */
+  --fs-2xl:   2.25rem;   /*  36px */
+  --fs-3xl:   3rem;      /*  48px */
+
+  /* — Jarak (Spacing) — */
+  --space-xs:   0.5rem;
+  --space-sm:   1rem;
+  --space-md:   1.5rem;
+  --space-lg:   2.5rem;
+  --space-xl:   4rem;
+
+  /* — Lain-lain — */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --shadow-sm:  0 2px 8px rgba(0, 119, 182, 0.10);
+  --shadow-md:  0 6px 24px rgba(0, 119, 182, 0.16);
+  --transition: 0.25s ease;
+}
+
+
+/* =============================================================
+   BAGIAN 3 — RESET & BASE
+============================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--clr-abu-teks);
+  background-color: var(--clr-latar);
+  line-height: 1.7;
+}
+
+/* Sembunyikan <hr> bawaan HTML — pemisah visual kini pakai CSS */
+hr {
+  display: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+}
+
+a {
+  color: var(--clr-biru-utama);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--clr-biru-muda);
+  text-decoration: underline;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+strong {
+  color: var(--clr-biru-tua);
+}
+
+
+/* =============================================================
+   BAGIAN 4 — TIPOGRAFI HEADING
+============================================================= */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--clr-abu-gelap);
+  line-height: 1.25;
+}
+
+h1 { font-size: var(--fs-3xl); font-weight: 800; }
+h2 { font-size: var(--fs-xl);  font-weight: 700; margin-bottom: var(--space-md); }
+h3 { font-size: var(--fs-lg);  font-weight: 600; margin-bottom: var(--space-xs); color: var(--clr-biru-tua); }
+h4 { font-size: var(--fs-md);  font-weight: 600; margin-bottom: var(--space-xs); color: var(--clr-biru-utama); }
+
+p  { margin-bottom: var(--space-sm); }
+
+
+/* =============================================================
+   BAGIAN 5 — HEADER
+============================================================= */
+header {
+  background: linear-gradient(135deg, var(--clr-biru-tua) 0%, var(--clr-biru-utama) 60%, var(--clr-biru-muda) 100%);
+  color: var(--clr-putih);
+  text-align: center;
+  padding: var(--space-xl) var(--space-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gelembung dekoratif latar header */
+header::before,
+header::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+header::before {
+  width: 300px; height: 300px;
+  top: -80px; left: -80px;
+}
+header::after {
+  width: 200px; height: 200px;
+  bottom: -60px; right: -40px;
+}
+
+header h1 {
+  color: var(--clr-putih);
+  font-size: var(--fs-3xl);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  margin-bottom: var(--space-xs);
+}
+
+header p {
+  color: rgba(255,255,255,0.90);
+  margin-bottom: 0.4rem;
+  font-size: var(--fs-md);
+}
+
+header p:first-of-type {  /* "Depot Isi Ulang..." */
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-aqua);
+  margin-bottom: var(--space-xs);
+}
+
+header strong {
+  color: var(--clr-kuning);
+}
+
+/* Badge pemilik & tanggal berdiri */
+header p:last-of-type {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius-lg);
+  padding: 0.3rem 1.2rem;
+  font-size: var(--fs-sm);
+  color: var(--clr-putih);
+}
+
+
+/* =============================================================
+   BAGIAN 6 — NAVIGASI
+============================================================= */
+nav {
+  background: var(--clr-putih);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 var(--space-sm);
+}
+
+nav p {
+  display: none; /* label "Navigasi Cepat:" disembunyikan */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin: 0;
+}
+
+nav ul li a {
+  display: block;
+  padding: 1rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--clr-biru-tua);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+
+nav ul li a:hover {
+  color: var(--clr-biru-muda);
+  border-bottom-color: var(--clr-biru-muda);
+  text-decoration: none;
+}
+
+
+/* =============================================================
+   BAGIAN 7 — LAYOUT MAIN & SECTION
+============================================================= */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+section {
+  background: var(--clr-putih);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--clr-biru-utama);
+}
+
+/* Section bergantian warna latar agar tidak monoton */
+section:nth-of-type(even) {
+  background: var(--clr-abu-muda);
+  border-top-color: var(--clr-biru-muda);
+}
+
+/* Judul section — dengan garis bawah aksen */
+section > h2 {
+  font-size: var(--fs-xl);
+  color: var(--clr-biru-tua);
+  padding-bottom: var(--space-xs);
+  border-bottom: 2px solid var(--clr-aqua);
+  margin-bottom: var(--space-md);
+}
+
+
+/* =============================================================
+   BAGIAN 8 — SECTION TENTANG & VISI-MISI
+============================================================= */
+#tentang p,
+#visi-misi p {
+  font-size: var(--fs-md);
+  color: var(--clr-abu-teks);
+}
+
+#visi-misi ol {
+  counter-reset: misi-counter;
+  list-style: none;
+  padding: 0;
+}
+
+#visi-misi ol li {
+  counter-increment: misi-counter;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--clr-aqua-pucat);
+}
+
+#visi-misi ol li::before {
+  content: counter(misi-counter);
+  min-width: 2rem;
+  height: 2rem;
+  background: var(--clr-biru-utama);
+  color: var(--clr-putih);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+
+/* =============================================================
+   BAGIAN 9 — SECTION KEUNGGULAN & JAM OPERASIONAL
+============================================================= */
+#keunggulan ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+}
+
+#keunggulan ul li {
+  background: var(--clr-aqua-pucat);
+  border-left: 4px solid var(--clr-biru-muda);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--fs-sm);
+  color: var(--clr-abu-gelap);
+  margin-bottom: 0;
+}
+
+/* Kotak jam operasional */
+#keunggulan h3:last-of-type + p,
+#keunggulan p:last-of-type {
+  background: var(--clr-kuning-muda);
+  border: 2px solid var(--clr-kuning);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  display: inline-block;
+  font-size: var(--fs-md);
+  color: var(--clr-abu-gelap);
+}
+
+
+/* =============================================================
+   BAGIAN 10 — SECTION PRODUK & HARGA
+============================================================= */
+#produk > p {
+  font-style: italic;
+  color: var(--clr-abu-teks);
+  margin-bottom: var(--space-md);
+}
+
+/* Kartu produk (article) */
+#produk article {
+  background: var(--clr-putih);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-aqua);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+#produk article:last-child {
+  margin-bottom: 0;
+}
+
+/* Sub-kartu per varian produk (h4 + figure + p) */
+.produk-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px dashed var(--clr-aqua);
+}
+
+.produk-item:last-of-type {
+  border-bottom: none;
+}
+
+/* Karena HTML tidak punya class .produk-item, kita target h4 di article */
+#produk article h4 {
+  margin-top: var(--space-sm);
+  color: var(--clr-biru-utama);
+}
+
+/* Figure dalam produk */
+#produk figure {
+  margin: var(--space-xs) 0 var(--space-xs) 0;
+  text-align: left;
+}
+
+#produk figure img {
+  width: 100%;
+  max-width: 280px;
+  height: 180px;
+  object-fit: cover;
+  border: 2px solid var(--clr-aqua);
+  border-radius: var(--radius-md);
+  background: var(--clr-abu-muda);
+  /* Placeholder saat foto belum ada */
+  color: var(--clr-biru-utama);
+}
+
+figcaption {
+  font-size: var(--fs-xs);
+  color: var(--clr-biru-utama);
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* Badge harga */
+#produk article p strong,
+#produk article > p strong {
+  display: inline-block;
+  background: var(--clr-hijau-muda);
+  color: var(--clr-hijau);
+  border: 1.5px solid var(--clr-hijau);
+  border-radius: var(--radius-sm);
+  padding: 0.15rem 0.6rem;
+  font-size: var(--fs-base);
+  font-family: var(--font-display);
+}
+
+/* Catatan biaya lantai */
+#produk article > p:last-of-type {
+  background: var(--clr-kuning-muda);
+  border-left: 4px solid var(--clr-kuning);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--fs-sm);
+}
+
+
+/* =============================================================
+   BAGIAN 11 — SECTION ULASAN PELANGGAN
+============================================================= */
+#ulasan article {
+  background: var(--clr-aqua-pucat);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+  border-left: 5px solid var(--clr-biru-muda);
+}
+
+#ulasan article h3 {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--clr-biru-tua);
+  margin-bottom: var(--space-xs);
+}
+
+#ulasan blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+#ulasan blockquote p {
+  font-size: var(--fs-sm);
+  color: var(--clr-abu-teks);
+  font-style: italic;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Tanda kutip dekoratif */
+#ulasan blockquote p::before {
+  content: '"';
+  font-size: 2.5rem;
+  color: var(--clr-biru-muda);
+  line-height: 0;
+  vertical-align: -0.5rem;
+  margin-right: 0.25rem;
+  font-family: var(--font-display);
+}
+
+
+/* =============================================================
+   BAGIAN 12 — SECTION PEMESANAN & KONTAK
+============================================================= */
+#pemesanan address {
+  font-style: normal;
+  background: var(--clr-aqua-pucat);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+  border-left: 4px solid var(--clr-biru-utama);
+  color: var(--clr-abu-gelap);
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+}
+
+#pemesanan ul {
+  list-style: none;
+  padding: 0;
+}
+
+#pemesanan ul li {
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--clr-aqua);
+  font-size: var(--fs-sm);
+}
+
+#pemesanan ul li:last-child {
+  border-bottom: none;
+}
+
+/* Tombol WA — link bergabung ke grup */
+#pemesanan a[href*="whatsapp"] {
+  display: inline-block;
+  background: #25D366;
+  color: var(--clr-putih);
+  padding: 0.45rem 1.2rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  margin-top: 0.3rem;
+  transition: background var(--transition), transform var(--transition);
+}
+
+#pemesanan a[href*="whatsapp"]:hover {
+  background: #128C7E;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+/* Kotak format pemesanan */
+#pemesanan pre {
+  background: var(--clr-biru-tua);
+  color: var(--clr-aqua);
+  font-size: var(--fs-sm);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 2;
+  letter-spacing: 0.03em;
+  margin: var(--space-sm) 0;
+  box-shadow: var(--shadow-md);
+}
+
+#pemesanan p:last-of-type {
+  background: var(--clr-abu-muda);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--fs-sm);
+  border: 1px solid var(--clr-aqua);
+}
+
+
+/* =============================================================
+   BAGIAN 13 — FOOTER
+============================================================= */
+footer {
+  background: var(--clr-biru-tua);
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  padding: var(--space-lg) var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+footer p {
+  margin-bottom: var(--space-xs);
+  font-size: var(--fs-sm);
+}
+
+footer strong {
+  color: var(--clr-putih);
+}
+
+footer em {
+  color: var(--clr-aqua);
+  font-size: var(--fs-base);
+  font-style: normal;
+  display: block;
+  margin-top: var(--space-xs);
+}
+
+footer a {
+  color: var(--clr-biru-muda);
+}
+
+footer a:hover {
+  color: var(--clr-putih);
+}
+
+
+/* =============================================================
+   PENYEMPURNAAN RESPONSIVE (Untuk Layar HP)
+============================================================= */
+@media (max-width: 640px) {
+  header h1 {
+    font-size: var(--fs-2xl); /* Mengecilkan judul agar muat */
+  }
+
+  /* Membuat navigasi bisa di-scroll ke samping jika menu terlalu banyak */
+  nav ul {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 5px; /* Memberi ruang scrollbar */
+    -webkit-overflow-scrolling: touch; /* Kelancaran scroll di iOS */
+  }
+
+  nav ul li a {
+    padding: 0.75rem 0.8rem;
+    font-size: var(--fs-sm);
+  }
+
+  /* Penyesuaian jarak utama (padding) */
+  main {
+    padding: var(--space-md) var(--space-xs);
+    gap: var(--space-md);
+  }
+
+  section {
+    padding: var(--space-md);
+  }
+
+  /* Memastikan gambar produk tetap 100% mengisi area di HP */
+  #produk figure img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #keunggulan ul {
+    grid-template-columns: 1fr; /* 1 kolom penuh di layar kecil */
+  }
+
+  #btn-pesan {
+    width: 100%; /* Tombol memenuhi lebar layar untuk memudahkan tap dengan jempol */
+    text-align: center;
+  }
+}
+/* =============================================================
+   BAGIAN 15 — FORM PEMESANAN
+============================================================= */
+.form-pesan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--clr-biru-tua);
+}
+
+.wajib {
+  color: #e63946;
+  margin-left: 2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--clr-abu-gelap);
+  background: var(--clr-putih);
+  border: 1.5px solid var(--clr-aqua);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.9rem;
+  width: 100%;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--clr-biru-utama);
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-group small {
+  font-size: var(--fs-xs);
+  color: var(--clr-biru-muda);
+  font-style: italic;
+}
+
+#btn-pesan {
+  align-self: flex-start;
+  background: #25D366;
+  color: var(--clr-putih);
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+#btn-pesan:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+}
+
+#btn-pesan:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  #btn-pesan {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* =============================================================
+   TAMBAHAN ANIMASI 1: Hero Section Fade-In
+============================================================= */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Terapkan state awal tidak terlihat */
+header h1,
+header p {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Berikan jeda (delay) agar munculnya bergantian (efek kaskade) */
+header h1 { animation-delay: 0.1s; }
+header p:nth-of-type(1) { animation-delay: 0.3s; }
+header p:nth-of-type(2) { animation-delay: 0.5s; }
+header p:nth-of-type(3) { animation-delay: 0.7s; }
+header p:last-of-type { animation-delay: 0.9s; }
+/* =============================================================
+   TAMBAHAN ANIMASI 2: Efek Hover Kartu Produk
+============================================================= */
+#produk article {
+  /* Pastikan ada transisi agar perubahannya halus */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+#produk article:hover {
+  transform: translateY(-8px); /* Mengangkat kartu sedikit ke atas */
+  box-shadow: var(--shadow-md); /* Menggunakan variabel bayangan tebal yang sudah ada */
+  border-color: var(--clr-biru-utama); /* Highlight garis tepi kartu */
+}
+/* =============================================================
+   TAMBAHAN ANIMASI 3: Efek Halus Tombol CTA / Kirim
+============================================================= */
+/* Tombol di dalam form */
+#btn-pesan {
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#btn-pesan:hover {
+  background-color: #128C7E; /* Warna berubah jadi lebih gelap */
+  transform: scale(1.03); /* Membesar 3% */
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); /* Efek cahaya di bawah tombol */
+}
+
+/* Tombol link WhatsApp biasa */
+#pemesanan a[href*="whatsapp"] {
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#pemesanan a[href*="whatsapp"]:hover {
+  background-color: #128C7E;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 5px 15px rgba(18, 140, 126, 0.3);
+}
+/* =============================================================
+   STYLING UNTUK PESAN ERROR VALIDASI
+============================================================= */
+.error-msg {
+  color: #e63946;
+  font-size: var(--fs-xs);
+  margin-top: -3px;
+  display: none; /* Disembunyikan secara default; JS yang mengubahnya */
+  font-style: italic;
+}
+
+/*
+   Kelas .input-error ditambahkan oleh JS saat kolom tidak valid.
+   Border berubah merah agar pengguna langsung tahu kolom mana
+   yang perlu diperbaiki.
+*/
+.input-error {
+  border-color: #e63946 !important;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15) !important;
+}
+
+/* =============================================================
+   STYLING TOMBOL SCROLL-TO-TOP
+   Memakai opacity + visibility (bukan display:none/block) supaya
+   transisi fade-in/fade-out bisa berjalan mulus lewat CSS.
+   Kelas .visible ditambahkan/dihapus oleh JavaScript.
+============================================================= */
+#btn-back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--clr-biru-utama);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  z-index: 999;
+
+  /* State awal: tidak terlihat, tidak bisa diklik */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+
+  /* Semua properti ditransisikan sekaligus */
+  transition:
+    opacity          0.3s ease,
+    visibility       0.3s ease,
+    transform        0.3s ease,
+    background-color var(--transition);
+}
+
+/* Saat JS menambahkan kelas .visible, tombol muncul dengan mulus */
+#btn-back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#btn-back-to-top:hover {
+  background-color: var(--clr-biru-muda);
+  transform: translateY(-5px);
+}
